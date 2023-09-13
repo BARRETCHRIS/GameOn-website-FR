@@ -1,7 +1,8 @@
+
 function editNav() {
   let x = document.getElementById("myTopnav");
   if (x.className === "topnav") {
-    x.className += " responsive";
+    x.className += "responsive";
   } else {
     x.className = "topnav";
   }
@@ -23,8 +24,10 @@ function launchModal() {
   modalbg.style.display = "block";
 }
 
+// close modal form
 function closeModal(){
   modalbg.style.display = "none";
 }
 
+// close modal event
 closeBtn.addEventListener("click", closeModal);
