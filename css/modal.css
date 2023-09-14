@@ -210,6 +210,10 @@ input {
   height: 48px;
 }
 
+.formData{
+  display: block;
+}
+
 .formData[data-error]::after {
   content: attr(data-error);
   font-size: 0.4em;
@@ -222,6 +226,7 @@ input {
   opacity: 0;
   transition: 0.3s;
 }
+
 .formData[data-error-visible="true"]::after {
   opacity: 1;
 }
