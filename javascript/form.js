@@ -1,31 +1,31 @@
 
-// Fonction submit
+// Submit modal function
 form.addEventListener("submit", (event) => {
-    // On empêche le comportement par défaut
+    // stop default action
     event.preventDefault();
-    //console.log("Il n’y a pas eu de rechargement de page");
 });
 
+// Content form - remove element
 function removeFormData() {
     formData.forEach(e => e.remove());
-    console.log(form);
-
-
+    console.log(form);    
 }
 
 function validate(){
-    
-    const validationWrap = document.createElement("p");
-    const validationMsg = validationWrap.innerText = sendMsg;
-
+    //Creat msg-thanks elements
+    const msgWrapThanks = document.createElement ("p");
+    msgWrapThanks.classList.add("msg-thanks")
+    msgWrapThanks.textContent = sendMsg;
+    //Start function remove content elements form
     removeFormData();
-    form.innerHTML = validationMsg;
+    //Insert msg-thanks element
+    form.prepend(msgWrapThanks);
 
+    
+    // FOR VERIFY
     for (let lbr = 0; lbr < listBtnRadio.length; lbr++){console.log(listBtnRadio[lbr].checked)};
     
-    console.log(validationMsg);
-
-   
+    console.log(form);
 
 }
 

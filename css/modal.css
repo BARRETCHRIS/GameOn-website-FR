@@ -164,7 +164,7 @@ main {
   z-index: 1;
   left: 0;
   top: 0;
-  height: 100%;
+  height: 90vh;
   width: 100%;
   overflow: auto;
   background-color: rgba(26, 39, 156, 0.4);
@@ -303,6 +303,17 @@ input[data-error]::after {
   left: 21%;
   top: 19%;
 }
+
+.msg-thanks{
+  width: 100%;
+  height: 60vh;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  
+
+}
+
 .close {
   position: absolute;
   right: 15px;
