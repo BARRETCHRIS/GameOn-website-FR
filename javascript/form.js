@@ -3,9 +3,10 @@
 form.addEventListener("submit", (event) => {
     // stop default action
     event.preventDefault();
+    console.log(event);
 });
 
-// Content form - remove element
+// Content form - remove elements
 function removeFormData() {
     formData.forEach(e => e.remove());
     console.log(form);    
@@ -20,7 +21,8 @@ function validate(){
     removeFormData();
     //Insert msg-thanks element
     form.prepend(msgWrapThanks);
-
+    // Reload submit default action
+    
     
     // FOR VERIFY
     for (let lbr = 0; lbr < listBtnRadio.length; lbr++){console.log(listBtnRadio[lbr].checked)};
