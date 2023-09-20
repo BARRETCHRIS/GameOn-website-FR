@@ -1,3 +1,4 @@
+/* GENERAL */
 :root {
   --font-default: "DM Sans", Arial, Helvetica, sans-serif;
   --font-slab: var(--font-default);
@@ -8,7 +9,6 @@
   margin: 0;
   padding: 0;
 }
-/* Landing Page */
 
 body {
   margin: 0;
@@ -17,7 +17,6 @@ body {
   justify-content: space-between;
   font-family: var(--font-default);
   font-size: 18px;
-  
   margin: 0 auto;
 }
 
@@ -26,20 +25,12 @@ p {
   padding: 0.5vw;
 }
 
-img {
-  padding-right: 1rem;
+.topnav {
+  margin: 3.5%;
+  display: flex;
+  justify-content: space-between;
 }
 
-.topnav {
-  overflow: hidden;
-  margin: 3.5%;
-}
-.header-logo {
-    float: left;
-}
-.main-navbar {
-    float: right;
-}
 .topnav a {
   float: left;
   display: block;
@@ -48,8 +39,7 @@ img {
   padding: 12px 12px;
   margin: 5px;
   text-decoration: none;
-  font-size: 20px;
-  font-family: Roboto, sans-serif;
+  font-size: 18px;
 }
 
 .topnav a:hover {
@@ -433,7 +423,10 @@ input[data-error]::after {
   color: #fff;
   position: relative;
   text-align: left;
-  /*min-width: 424px;*/
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  gap: 5vw;
 }
 .hero-content::after {
   content: "";
@@ -456,7 +449,7 @@ input[data-error]::after {
 .hero-text {
   width: 146%;
   font-weight: normal;
-  margin-top: 57px;
+  
   padding: 0;
 }
 .btn-signup {
@@ -465,7 +458,6 @@ input[data-error]::after {
   font-size: 1.3rem;
   padding: 15px 23px;
   margin: 0;
-  margin-top: 59px;
 }
 .hero-img {
   grid-column: span 8;

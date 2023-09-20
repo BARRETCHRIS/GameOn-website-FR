@@ -17,8 +17,12 @@ let listBtnRadio = document.querySelectorAll("input[type=radio]");
 
 
  // REGEX
- const regOnlyTxt = /\b([A-ZÀ-ÿ][-,a-z. ']+[ ]*)+/;
- const regEmail = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/;
+ const regOnlyTxt = new RegExp(
+    '^([A-Za-z]{2,20})?([-]{0,1})?([A-Za-z]{2,20})$'            
+  );
+ const regEmail = new RegExp(
+  '^[a-zA-Z0-9.-_]+[@]{1}[a-zA-Z0-9.-_]+[.]{1}[a-z]{2,10}$'
+);
 
  // Message
  const sendMsg = "Merci pour votre inscription";
