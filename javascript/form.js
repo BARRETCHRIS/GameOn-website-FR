@@ -49,10 +49,11 @@ form.addEventListener("submit", (event) => {
     console.log(birthdateVal);
     console.log(quantityVal);
 
-    thanksBooking();
+    
 
     if(firstVal.match(regOnlyTxt)){ 
         console.log("GOOD JOB");
+        thanksBooking();
     }else{
         console.log("BAD JOB");
     }
@@ -68,5 +69,8 @@ function thanksBooking(){
     formData.forEach(e => e.remove());
     //Insert msg-thanks element
     form.prepend(msgWrapThanks);
+    formBtnSubmit.textContent = "Fermer"
 }
 
+
+console.log(formBtnSubmit.textContent);
