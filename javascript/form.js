@@ -11,30 +11,14 @@ form.addEventListener("submit", (event) => {
     let quantityVal = quantity.value;
     let verifControl = true;
 
-    console.log(firstVal);
-    console.log(lastVal);
-    console.log(emailVal);
-    console.log(birthdateVal);
-    console.log(quantityVal);
-
-
     //Check input value for first name
     if(firstVal.match(regOnlyTxt)){ 
         console.log("GOOD JOB");
         firstControl = true;
     }else{
         console.log("BAD JOB");
-        firstControl = false;
-
-        const msgWrapError = document.createElement("div");
-        msgWrapError.classList.add("error-msg");
-        msgWrapError.textContent = msgError;
-        //generate error action
-        first.className +=" txt-control-error";
-        const formDataFirst = formData[0];
-        formDataFirst.appendChild(msgWrapError);
-        console.log(formDataFirst);
-          
+        showError(first); 
+        firstControl = false;    
     }
 
     //Check input value for last name
@@ -43,16 +27,8 @@ form.addEventListener("submit", (event) => {
         lastControl = true;
     }else{
         console.log("BAD JOB");
+        showError(last);
         lastControl = false;
-
-        const msgWrapError = document.createElement("div");
-        msgWrapError.classList.add("error-msg");
-        msgWrapError.textContent = msgError;
-        //generate error action
-        last.className +=" txt-control-error";
-        const formDataLast = formData[1];
-        formDataLast.appendChild(msgWrapError);
-        console.log(formDataLast);
     }
 
     //Check input value for email
@@ -61,40 +37,60 @@ form.addEventListener("submit", (event) => {
         emailControl = true;
     }else{
         console.log("BAD JOB");
+        showError(email);
         emailControl = false;
-
-        const msgWrapError = document.createElement("div");
-        msgWrapError.classList.add("error-msg");
-        msgWrapError.textContent = msgError;
-        //generate error action
-        email.className +=" txt-control-error";
-        const formDataEmail = formData[2];
-        formDataEmail.appendChild(msgWrapError);
-        console.log(formDataEmail);
     }
-
+   
     
-
-    if(firstControl === true && lastControl === true && emailControl === true){ 
-        console.log("GOOD SEND");
-        thanksBooking();
-    }else{
-        console.log("BAD SEND");
+    if (birthdate.value === "") {
+        showError(birthDate);
+        verifControl = false;
     }
     
+    if (quantity.value === "") {
+        showError(quantity);
+        verifControl = false;
+    }
+    
+    let radioChecked = false;
+    listBtnRadio.forEach(radio => {
+        if (radio.checked) {
+            radioChecked = true;
+        }
+    });
+    if (!radioChecked) {
+        verifControl = false;
+    }
+    
+    if (!document.getElementById('checkbox1').checked) {
+        verifControl = false;
+    }
+    
+    if (verifControl) {
+        console.log("Toutes les vérifications sont passées, soumettre le formulaire...");
+        form.submit();
+    } else {
+        console.log("Il y a des erreurs dans le formulaire, ne pas soumettre.");
+    }
 });
+    
+
+    
+
+    
+
 
 //creat element error
 //function creatErrorElemt(){
-    //const msgWrapError = document.createElement("div");
-    //msgWrapError.classList.add("error-msg");
-   // msgWrapError.textContent = msgError;
-    //generate error action
-    //first.className +=" txt-control-error";
-    //const formDataFirst = formData[0];
-    //formDataFirst.appendChild(msgWrapError);
-    //console.log(formDataFirst);
-//}
+    function showError(element) {
+        const msgWrapError = document.createElement("div");
+        msgWrapError.classList.add("error-msg");
+        msgWrapError.textContent = msgError;
+        element.classList.add("txt-control-error");
+        const formDataElement = element.parentElement;
+        formDataElement.appendChild(msgWrapError);
+      }
+      
 
 //creat and show thanks booking message
 function thanksBooking(){
@@ -117,5 +113,4 @@ function thanksBooking(){
         //Reset form
     });
 }
-
 

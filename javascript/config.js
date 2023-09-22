@@ -27,4 +27,4 @@ let listBtnRadio = document.querySelectorAll("input[type=radio]");
  // Messages
  const sendMsg = "Merci pour votre inscription";
  //test error message
- const msgError = "Error lorem ipsum"
+ const msgError = "Error lorem ipsum";
