@@ -18,7 +18,10 @@ let email = document.getElementById("email");
 let birthDate = document.getElementById("birthdate");
 let quantity =document.getElementById("quantity");
 
-let listBtnRadio = document.querySelectorAll("input[type=radio]");
+const city = document.querySelectorAll('[name="location"]');
+const cgu = document.getElementById('checkbox1');
+
+console.log(city);
 
 
  // REGEX
@@ -31,7 +34,7 @@ let listBtnRadio = document.querySelectorAll("input[type=radio]");
  const lineBreack = document.createElement ("br");
  const sendMsg = "Merci pour votre inscription";
  //test error message
- //const msgError = "Error lorem ipsum";
+ const errorMsg = "Error lorem ipsum";
 
  const msgError = {
    inputEmpty : "Veuillez renseigner ce champs",

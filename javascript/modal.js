@@ -23,6 +23,7 @@ closeBtn.addEventListener("click", closeModal);
 // close modal form
 function closeModal(){
   modalbg.style.display = "none";
+  location.reload();
 }
 // END CLOSE MODAL
 

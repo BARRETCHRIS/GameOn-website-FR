@@ -27,7 +27,7 @@ form.addEventListener("submit", (event) => {
 
         const msgWrapError = document.createElement("div");
         msgWrapError.classList.add("error-msg");
-        msgWrapError.textContent = msgError;
+        msgWrapError.textContent = errorMsg;
         //generate error action
         first.className +=" txt-control-error";
         const formDataFirst = formData[0];
@@ -45,7 +45,7 @@ form.addEventListener("submit", (event) => {
 
         const msgWrapError = document.createElement("div");
         msgWrapError.classList.add("error-msg");
-        msgWrapError.textContent = msgError;
+        msgWrapError.textContent = errorMsg;
         //generate error action
         last.className +=" txt-control-error";
         const formDataLast = formData[1];
@@ -63,7 +63,7 @@ form.addEventListener("submit", (event) => {
 
         const msgWrapError = document.createElement("div");
         msgWrapError.classList.add("error-msg");
-        msgWrapError.textContent = msgError;
+        msgWrapError.textContent = errorMsg;
         //generate error action
         email.className += " txt-control-error";
         const formDataEmail = formData[2];
@@ -81,7 +81,7 @@ form.addEventListener("submit", (event) => {
 
         const msgWrapError = document.createElement("div");
         msgWrapError.classList.add("error-msg");
-        msgWrapError.textContent = msgError;
+        msgWrapError.textContent = errorMsg;
         //generate error action
         birthDate.className += " txt-control-error";
         const formDataBirth = formData[3];
@@ -99,12 +99,46 @@ form.addEventListener("submit", (event) => {
 
         const msgWrapError = document.createElement("div");
         msgWrapError.classList.add("error-msg");
-        msgWrapError.textContent = msgError;
+        msgWrapError.textContent = errorMsg;
         //generate error action
         quantity.className += " txt-control-error";
-        const formDataQuantity= formData[4];
+        const formDataQuantity = formData[4];
         formDataQuantity.appendChild(msgWrapError);
         console.log(formDataQuantity);
+    }
+
+    if(quantityVal != ""){ 
+        console.log("GOOD JOB");
+        quantityControl = true;
+    }else{
+        console.log("BAD JOB");
+        quantityControl = false;
+
+        const msgWrapError = document.createElement("div");
+        msgWrapError.classList.add("error-msg");
+        msgWrapError.textContent = errorMsg;
+        //generate error action
+        quantity.className += " txt-control-error";
+        const formDataQuantity = formData[4];
+        formDataQuantity.appendChild(msgWrapError);
+        console.log(formDataQuantity);
+    }
+
+    if( 'city : checked' == null) {
+        console.log("BAD JOB");
+        cityControl = false;
+
+        const msgWrapError = document.createElement("div");
+        msgWrapError.classList.add("error-msg");
+        msgWrapError.textContent = msgError.contestCity;
+        //generate error action
+        city.className += " txt-control-error";
+        const formDataCity = formData[5];
+        formDataCity.prepend(msgWrapError);
+        console.log(formDataCity);
+    }else{
+        console.log("GOOD JOB");
+        cityControl = true;
     }
     
     

@@ -1,4 +1,3 @@
-
 //creat and show thanks booking message
 function thanksBooking(){
     //Creat element for thanks message
@@ -25,35 +24,28 @@ function thanksBooking(){
     });    
 }
 
-// Check datas values
-function checkDatas(datas){
-    if(datas.value === ""){
-        const msgWrapError = document.createElement("div");
-        msgWrapError.classList.add("error-msg");
-        msgWrapError.textContent = msgError.inputEmpty;
-        //generate error action
-        datas.classList.add("txt-control-error");
-        let datasParent = datas.parentNode;
-        datasParent.appendChild(msgWrapError);
-
-    }else{
-        datas.classList.remove("txt-control-error");
-        //thanksBooking()
+// Check datas values empty
+function checkEmpty(valInput){
+    if (valInput === ""){
+        throw new error(msgError.enputEmpty);
     }
 }
 
+function checkTxtOnly(valInput){
+    if (!regOnlyTxt.test(valInput)){
+        throw new error(msgError.textOnly);
+    }
+}
 
+function checkEmail(email){
+    if (!regEmail.test(email)){
+        throw new error(msgError.textOnly);
+    }
+}
 
-form.addEventListener("submit", (event)=>{
-    event.preventDefault();
-    checkDatas(first);
-    checkDatas(last);
-})
+function sendErrorMsg(msgError){
+    let 
+    const msgWrapError = document.createElement("div");
+    msgWrapError.classList.add("error-msg");
 
-first.addEventListener("change", () => {
-    checkDatas(first);
-    checkDatas(last);
-})
-
-
-
+}

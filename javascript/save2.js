@@ -1,28 +1,9 @@
-function checkDatas(marker){
-    if(marker.value === ""){
-        const errorWrap = document.createElement("div");
-        marker.classList.add("error-msg");
-        errorWrap.textContent = messages.inputEmpty;
-    }else{
-        marker.classList.remove("error-msg");
-        thanksBooking();
-    }
-
-    form.addEventListener("submit", (event)=>{
-        event.preventDefault();
-        
-        
-    })
-}
-
 //creat and show thanks booking message
 function thanksBooking(){
     //Creat element for thanks message
     const msgWrapThanks = document.createElement("p");
     msgWrapThanks.classList.add("msg-thanks");
-    msgWrapThanks.textContent = "Merci pour";
-    msgWrapThanks += document.createElement("br");
-    msgWrapThanks.innerText += "votre inscription";
+    msgWrapThanks.textContent = sendMsg;
 
     //Reset form
     const formElement = document.getElementById('reservationForm');
@@ -39,9 +20,40 @@ function thanksBooking(){
     form.addEventListener("submit", (event) => {
         closeModal();
         //Reflech page
-        location.reload();
-        //Reset form
-        
-    });
-    
+        location.reload();    
+    });    
 }
+
+// Check datas values empty
+function checkDatas(datas){
+    const msgWrapError = document.createElement("div");
+    if(datas.value === ""){
+        msgWrapError.classList.add("error-msg");
+        msgWrapError.textContent = msgError.inputEmpty;
+        //generate error action
+        datas.classList.add("txt-control-error");
+        let datasParent = datas.parentNode;
+        datasParent.appendChild(msgWrapError);
+
+    }else{
+        msgWrapError.textContent.remove("msgError.inputEmpty");
+        datas.classList.remove("txt-control-error");
+        thanksBooking();
+    }
+}
+
+
+
+form.addEventListener("submit", (event)=>{
+    event.preventDefault();
+    checkDatas(first);
+    checkDatas(last);
+})
+
+first.addEventListener("change", () => {
+    checkDatas(first);
+});
+
+last.addEventListener("change", () => {
+    checkDatas(last);
+})
