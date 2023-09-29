@@ -72,12 +72,7 @@ form.addEventListener("submit", (event) => {
     } else {
         console.log("Il y a des erreurs dans le formulaire, ne pas soumettre.");
     }
-});
-    
-
-    
-
-    
+});    
 
 
 //creat element error
@@ -111,6 +106,8 @@ function thanksBooking(){
         //Reflech page
         location.reload();
         //Reset form
+        //const formElement = document.getElementById('reservationForm');
+        //formElement.reset();
     });
 }
 

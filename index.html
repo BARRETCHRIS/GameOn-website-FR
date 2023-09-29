@@ -17,7 +17,10 @@
     <!-- Liens Scripts JS -->
     <script src="javascript/config.js" defer></script>
     <script src="javascript/modal.js" defer></script>
-    <script src="javascript/form.js" defer></script>
+    <!--<script src="javascript/form.js" defer></script>-->
+    
+    <script src="javascript/controlSheet.js" defer></script>
+    
   </head>
   <body>
     <!-- Navbar and menu burger -->
@@ -59,7 +62,7 @@
           </button>
         </div>
         <div class="hero-img">
-          <img src="assets/images/bg_img.jpg" alt="img" />
+          <img src="assets/images/bg_img.jpg" alt="img"/>
         </div>
         <button class="btn-signup modal-btn">
           je m'inscris
@@ -78,9 +81,11 @@
           <!-- Modal booking - form -->
           <div class="modal-body">
             <form
+              id="reservationForm";
               name="reserve"
               action="index.html"
               method="get"
+              novalidate
               >
               <!--onsubmit="return validate();"-->
               <div
@@ -91,8 +96,9 @@
                   type="text"
                   id="first"
                   name="first"
-                  minlength="2"
-                /><br>
+                  autocomplete="given-name"  
+                />
+                <br>
               </div>
               <div
                 class="formData">
@@ -102,6 +108,7 @@
                   type="text" 
                   id="last"
                   name="last"
+                  autocomplete="family-name"
                 /><br>
               </div>
               <div
@@ -112,6 +119,7 @@
                   type="email"
                   id="email"
                   name="email"
+                  autocomplete="off"
                 /><br>
               </div>
               <div
@@ -205,7 +213,6 @@
                   class="checkbox-input"
                   type="checkbox"
                   id="checkbox1"
-                  checked
                 />
                 <label class="checkbox2-label" for="checkbox1" required>
                   <span class="checkbox-icon"></span>
@@ -220,7 +227,7 @@
                 <br>
               </div>
 
-              <button class="btn-submit button">C'est parti</button>
+              <button class="btn-submit button" type="submit">C'est parti</button>
              
             </form>
           </div>

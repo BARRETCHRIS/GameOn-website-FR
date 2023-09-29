@@ -7,7 +7,10 @@ const closeBtn = document.querySelector(".close");
 const form = document.querySelector("form");
 const formBtnSubmit= document.querySelector("form button");
 
-console.log(formDataInput);
+//const dateNow = Date();
+//console.log(dateNow);
+
+console.log(formData);
 // FORM Elements
 let first = document.getElementById("first"); 
 let last = document.getElementById("last");
@@ -22,9 +25,22 @@ let listBtnRadio = document.querySelectorAll("input[type=radio]");
  const regOnlyTxt = new RegExp(
     '^([A-Za-z]{2,20})?([-]{0,1})?([A-Za-z]{2,20})$');
  const regEmail = new RegExp(
-  '^[a-zA-Z0-9.-_]+[@]{1}[a-zA-Z0-9.-_]+[.]{1}[a-z]{2,10}$');
+  '^[a-z0-9.-_]+@{1}[a-z0-9.-_]+\.{1}[a-z]{2,20}$');
 
  // Messages
+ const lineBreack = document.createElement ("br");
  const sendMsg = "Merci pour votre inscription";
  //test error message
- const msgError = "Error lorem ipsum";
+ //const msgError = "Error lorem ipsum";
+
+ const msgError = {
+   inputEmpty : "Veuillez renseigner ce champs",
+   textOnly : "Veuillez inscrire 2 lettres sans chiffres ou caractères spéciaux ",
+   email : "Cette adresse email n'est pas valide, veuillez corriger",
+   contestCity : "Veuillez choisir une ville",
+   cgu : "Veuillez lire et accepter les cgu"
+
+
+ }
+
+ 
