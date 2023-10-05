@@ -142,3 +142,31 @@ form.addEventListener("submit", (event) => {
         console.log("Il y a des erreurs dans le formulaire. Veuillez corriger les champs.");
     }
 });
+
+//creat and show thanks booking message
+function thanksBooking(){
+    //Creat element for thanks message
+    const msgWrapThanks = document.createElement("p");
+    msgWrapThanks.classList.add("msg-thanks");
+    msgWrapThanks.innerHTML = sendMsg;
+
+    //Reset form
+    const formElement = document.getElementById('reservationForm');
+    formElement.reset();
+
+    //Start function remove content elements form
+    formData.forEach(e => e.remove());
+    //Insert msg-thanks element
+    form.prepend(msgWrapThanks);
+    //change text form submit button
+    formBtnSubmit.textContent = "Fermer";
+
+    //Change default submit action and reset form
+    
+    form.addEventListener("submit", (event) => {
+        closeModal();
+        //Reflech page
+        location.reload();    
+    });
+    
+}
