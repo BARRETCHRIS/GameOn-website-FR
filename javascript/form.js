@@ -1,113 +1,147 @@
-// Submit modal function
-form.addEventListener("submit", (event) => {
-    //stop default submit action
-    event.preventDefault();
-    console.log(event.preventDefault);
+function generateErrorMessage(tag, errorMessage) {
+    let msgWrapError = tag.parentNode.querySelector(".error-msg");
 
-    let firstVal = first.value;
-    let lastVal = last.value;
-    let emailVal = email.value;
-    let birthdateVal = birthDate.value;
-    let quantityVal = quantity.value;
-    let verifControl = true;
+    if (errorMessage) {
+        tag.style.border = "#fe142f 2px solid";
+        if (!msgWrapError) {
+            msgWrapError = document.createElement("div");
+            msgWrapError.classList.add("error-msg");
+            msgWrapError.textContent = errorMessage;
+            tag.parentNode.appendChild(msgWrapError);
+        }
+    } else {
+        tag.style.border = "none";
+        if (msgWrapError) {
+            msgWrapError.remove();
+        }
+    }
+}
 
-    //Check input value for first name
-    if(firstVal.match(regOnlyTxt)){ 
-        console.log("GOOD JOB");
-        firstControl = true;
-    }else{
-        console.log("BAD JOB");
-        showError(first); 
-        firstControl = false;    
+function checkEmptyInput(tag){
+    let emptyCheck = "";
+    let errorMessage = tag.value === "" ? msgError.inputEmpty : null;
+    generateErrorMessage(tag, errorMessage);
+    emptyCheck = errorMessage ? false : true;
+    return emptyCheck;
+}
+
+function checkText(tag){
+    let textCheck = "";
+    let errorMessage = tag.value.match(regOnlyTxt) ? null : msgError.textOnly;
+    generateErrorMessage(tag, errorMessage);
+    textCheck = errorMessage ? false : true;
+    return textCheck;
+}
+
+function checkEmail(tag){
+    let emailCheck = "";
+    let errorMessage = tag.value.match(regEmail) ? null : msgError.email;
+    generateErrorMessage(tag, errorMessage);
+    emailCheck = errorMessage ? false : true;
+    return emailCheck;
+}
+
+function checkDate(tag){
+    let dateCheck = "";
+    let errorMessage = "";
+    const today = new Date();
+    const selectedDate = new Date(tag.value);
+
+    if (selectedDate > today) {
+        errorMessage = msgError.dateOver;
     }
 
-    //Check input value for last name
-    if(lastVal.match(regOnlyTxt)){ 
-        console.log("GOOD JOB");
-        lastControl = true;
-    }else{
-        console.log("BAD JOB");
-        showError(last);
-        lastControl = false;
-    }
+    generateErrorMessage(tag, errorMessage);
 
-    //Check input value for email
-    if(emailVal.match(regEmail)){ 
-        console.log("GOOD JOB");
-        emailControl = true;
-    }else{
-        console.log("BAD JOB");
-        showError(email);
-        emailControl = false;
-    }
-   
-    
-    if (birthdate.value === "") {
-        showError(birthDate);
-        verifControl = false;
-    }
-    
-    if (quantity.value === "") {
-        showError(quantity);
-        verifControl = false;
-    }
-    
+    dateCheck = errorMessage ? false : true;
+    return dateCheck;
+
+}
+
+function checkRadio(tag){
+    let radioCheck = "";
+    let errorMessage = "";
+
     let radioChecked = false;
-    listBtnRadio.forEach(radio => {
+    cityList.forEach((radio) => {
         if (radio.checked) {
             radioChecked = true;
         }
     });
-    if (!radioChecked) {
-        verifControl = false;
+
+    errorMessage = radioChecked ? null : msgError.contestCity;
+    generateErrorMessage(tag, errorMessage);
+
+    radioCheck = errorMessage ? false : true;
+    return radioCheck;
+}
+
+function checkCheckbox(tag){
+    let checkboxCheck = "";
+    let errorMessage = tag.checked ? null : msgError.cgu;
+    generateErrorMessage(tag, errorMessage);
+
+    checkboxCheck = errorMessage ? false : true;
+    return checkboxCheck;
+}
+
+// Submit modal function
+form.addEventListener("submit", (event) => {
+    event.preventDefault(); // Empêche l'envoi du formulaire par défaut
+
+    let emptyCheck = true, textCheck = true, emailCheck = true, dateCheck = true, radioCheck = true, checkboxCheck = true;
+
+    for (let val = 0; val < 5; val++) {
+        let currentVal = formDataInput[val];
+        emptyCheck = checkEmptyInput(currentVal) && emptyCheck;   
     }
-    
-    if (!document.getElementById('checkbox1').checked) {
-        verifControl = false;
+
+    for (let txt = 0; txt < 2; txt++) {
+        let currentTxt = formDataInput[txt];
+        textCheck = checkText(currentTxt) && textCheck;   
     }
-    
-    if (verifControl) {
-        console.log("Toutes les vérifications sont passées, soumettre le formulaire...");
-        form.submit();
+
+    emailCheck = checkEmail(email);
+    dateCheck = checkDate(birthDate);
+    radioCheck = checkRadio(cityList[0]); 
+    checkboxCheck = checkCheckbox(cgu);
+
+    // Vérifier toutes les conditions
+    if (emptyCheck && textCheck && emailCheck && dateCheck && radioCheck && checkboxCheck) {
+        console.log("Tous les champs sont valides. Envoi du formulaire...");
+        thanksBooking();
     } else {
-        console.log("Il y a des erreurs dans le formulaire, ne pas soumettre.");
+        console.log("Il y a des erreurs dans le formulaire. Veuillez corriger les champs.");
     }
-});    
+});
 
 
-//creat element error
-//function creatErrorElemt(){
-    function showError(element) {
-        const msgWrapError = document.createElement("div");
-        msgWrapError.classList.add("error-msg");
-        msgWrapError.textContent = msgError;
-        element.classList.add("txt-control-error");
-        const formDataElement = element.parentElement;
-        formDataElement.appendChild(msgWrapError);
-      }
-      
 
 //creat and show thanks booking message
 function thanksBooking(){
     //Creat element for thanks message
     const msgWrapThanks = document.createElement("p");
-    msgWrapThanks.classList.add("msg-thanks")
-    msgWrapThanks.textContent = sendMsg;
+    msgWrapThanks.classList.add("msg-thanks");
+    msgWrapThanks.innerHTML = sendMsg;
+
+    //Reset form
+    const formElement = document.getElementById('reservationForm');
+    formElement.reset();
+
     //Start function remove content elements form
     formData.forEach(e => e.remove());
     //Insert msg-thanks element
     form.prepend(msgWrapThanks);
     //change text form submit button
-    formBtnSubmit.textContent = "Fermer"
-    //Restart default submit action and reset form
-    //NB!! à corriger 
+    formBtnSubmit.textContent = "Fermer";
+
+    //Change default submit action and reset form
+    
     form.addEventListener("submit", (event) => {
         closeModal();
         //Reflech page
-        location.reload();
-        //Reset form
-        //const formElement = document.getElementById('reservationForm');
-        //formElement.reset();
+        location.reload();    
     });
+    
 }
 

@@ -125,7 +125,7 @@ form.addEventListener("submit", (event) => {
     }
 
     if( 'city : checked' == null) {
-        console.log("BAD JOB");
+        console.log("BAD JOB CITY");
         cityControl = false;
 
         const msgWrapError = document.createElement("div");
@@ -157,7 +157,7 @@ function thanksBooking(){
     //Creat element for thanks message
     const msgWrapThanks = document.createElement("p");
     msgWrapThanks.classList.add("msg-thanks");
-    msgWrapThanks.textContent = sendMsg;
+    msgWrapThanks.innerHTML = sendMsg;
 
     //Reset form
     const formElement = document.getElementById('reservationForm');

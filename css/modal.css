@@ -170,6 +170,9 @@ main {
   position: relative;
   color: #fff;
   padding: 10px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
   
 }
 
@@ -213,6 +216,7 @@ input {
   border-radius: 8px;
   font-size: 20px;
   height: 48px;
+  border: none;
 }
 
 .txt-control-error{
@@ -321,11 +325,11 @@ input[data-error]::after {
 }
 
 .msg-thanks{
-  width: 40%;
-  height: 50%;
+  width: 100%;
+  min-height: 400px;
   display: flex;
   flex-direction: column;
-  justify-content: space-evenly;
+  justify-content: space-between;
   align-items: center;
   text-align: center;
   margin:  auto;
