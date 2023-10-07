@@ -534,6 +534,7 @@ footer {
   .hero-content::after {
     content: unset;
   }
+
   .hero-content .btn-signup {
     display: none;
   }

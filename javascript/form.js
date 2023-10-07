@@ -18,104 +18,163 @@ function generateErrorMessage(tag, errorMessage) {
 }
 
 function checkEmptyInput(tag){
-    let emptyCheck = "";
-    let errorMessage = tag.value === "" ? msgError.inputEmpty : null;
-    generateErrorMessage(tag, errorMessage);
-    emptyCheck = errorMessage ? false : true;
+    let emptyCheck = false;
+    try {
+        if (tag.value === "") {
+            throw new Error(msgError.inputEmpty);
+        }
+        generateErrorMessage(tag, null);
+        emptyCheck = true;
+    } catch (error) {
+        generateErrorMessage(tag, error.message);
+    }
     return emptyCheck;
 }
 
 function checkText(tag){
-    let textCheck = "";
-    let errorMessage = tag.value.match(regOnlyTxt) ? null : msgError.textOnly;
-    generateErrorMessage(tag, errorMessage);
-    textCheck = errorMessage ? false : true;
+    let textCheck = false;
+    try {
+        if (!tag.value.match(regOnlyTxt)) {
+            throw new Error(msgError.textOnly);
+        }
+        generateErrorMessage(tag, null);
+        textCheck = true;
+    } catch (error) {
+        generateErrorMessage(tag, error.message);
+    }
     return textCheck;
 }
 
 function checkEmail(tag){
-    let emailCheck = "";
-    let errorMessage = tag.value.match(regEmail) ? null : msgError.email;
-    generateErrorMessage(tag, errorMessage);
-    emailCheck = errorMessage ? false : true;
+    let emailCheck = false;
+    try {
+        if (!tag.value.match(regEmail)) {
+            throw new Error(msgError.email);
+        }
+        generateErrorMessage(tag, null);
+        emailCheck = true;
+    } catch (error) {
+        generateErrorMessage(tag, error.message);
+    }
     return emailCheck;
 }
 
 function checkDate(tag){
-    let dateCheck = "";
-    let errorMessage = "";
-    const today = new Date();
-    const selectedDate = new Date(tag.value);
+    let dateCheck = false;
+    try {
+        if (tag.value === "") {
+            throw new Error(msgError.inputEmpty);
+        }
 
-    if (selectedDate > today) {
-        errorMessage = msgError.dateOver;
+        const dateParts = tag.value.split("-");
+        const year = dateParts[0];
+       
+        // Check if year has more 4 numbers.
+        if (!regYear.test(year)) {
+            throw new Error(msgError.dateOver);
+        }
+
+        const today = new Date();
+        const selectedDate = new Date(tag.value);
+        if (selectedDate > today) {
+            throw new Error(msgError.dateOver);
+        }
+        generateErrorMessage(tag, null);
+        dateCheck = true;
+    } catch (error) {
+        generateErrorMessage(tag, error.message);
     }
-
-    generateErrorMessage(tag, errorMessage);
-
-    dateCheck = errorMessage ? false : true;
     return dateCheck;
-
 }
 
 function checkRadio(tag){
-    let radioCheck = "";
-    let errorMessage = "";
-
-    let radioChecked = false;
-    cityList.forEach((radio) => {
-        if (radio.checked) {
-            radioChecked = true;
+    let radioCheck = false;
+    try {
+        let radioChecked = false;
+        cityList.forEach((radio) => {
+            if (radio.checked) {
+                radioChecked = true;
+            }
+        });
+        if (!radioChecked) {
+            throw new Error(msgError.contestCity);
         }
-    });
-
-    errorMessage = radioChecked ? null : msgError.contestCity;
-    generateErrorMessage(tag, errorMessage);
-
-    radioCheck = errorMessage ? false : true;
+        generateErrorMessage(tag, null);
+        radioCheck = true;
+    } catch (error) {
+        generateErrorMessage(tag, error.message);
+    }
     return radioCheck;
 }
 
 function checkCheckbox(tag){
-    let checkboxCheck = "";
-    let errorMessage = tag.checked ? null : msgError.cgu;
-    generateErrorMessage(tag, errorMessage);
-
-    checkboxCheck = errorMessage ? false : true;
+    let checkboxCheck = false;
+    try {
+        if (!tag.checked) {
+            throw new Error(msgError.cgu);
+        }
+        generateErrorMessage(tag, null);
+        checkboxCheck = true;
+    } catch (error) {
+        generateErrorMessage(tag, error.message);
+    }
     return checkboxCheck;
 }
 
-// Submit modal function
 form.addEventListener("submit", (event) => {
-    event.preventDefault(); // Empêche l'envoi du formulaire par défaut
+    event.preventDefault(); 
 
-    let emptyCheck = true, textCheck = true, emailCheck = true, dateCheck = true, radioCheck = true, checkboxCheck = true;
+    const checkFonctions =[
+        checkEmptyInput,
+        checkText,
+        checkEmail,
+        checkDate,
+        checkRadio,
+        checkCheckbox
+    ];
 
-    for (let val = 0; val < 5; val++) {
-        let currentVal = formDataInput[val];
-        emptyCheck = checkEmptyInput(currentVal) && emptyCheck;   
-    }
+    const formInputsArray = Array.from(formDataInput);
 
-    for (let txt = 0; txt < 2; txt++) {
-        let currentTxt = formDataInput[txt];
-        textCheck = checkText(currentTxt) && textCheck;   
-    }
+    const validationResults = formInputsArray.map((input, index) => {
 
-    emailCheck = checkEmail(email);
-    dateCheck = checkDate(birthDate);
-    radioCheck = checkRadio(cityList[0]); 
-    checkboxCheck = checkCheckbox(cgu);
+        let checksResults = {};
+    
+        if (input.getAttribute('type') != "radio" && input.getAttribute('type') != "checkbox" ) {
+            checksResults.emptyCheck = checkEmptyInput(input);
+        }
+    
+        if (input.getAttribute('type') === "text"){
+            checksResults.textCheck = checkText(input);
+        };
+    
+        if (input.getAttribute('type') === "email"){
+            checksResults.emailCheck = checkEmail(input);
+        };
+    
+        if (input.getAttribute('type') === "date"){
+            checksResults.dateCheck = checkDate(input);
+        };
+    
+        if (input.getAttribute('type') === "radio"){
+            checksResults.radioCheck = checkRadio(input);
+        };
+    
+        if (input.getAttribute('name') === "cgu"){
+            checksResults.checkboxCheck = checkCheckbox(input);
+        };
+    
+        return checksResults;
+    });
 
-    // Vérifier toutes les conditions
-    if (emptyCheck && textCheck && emailCheck && dateCheck && radioCheck && checkboxCheck) {
-        console.log("Tous les champs sont valides. Envoi du formulaire...");
+    const allChecksTrue = validationResults.every(resultObj => {
+        return Object.values(resultObj).every(check => check === true);
+    });
+
+    if (allChecksTrue) {
         thanksBooking();
-    } else {
-        console.log("Il y a des erreurs dans le formulaire. Veuillez corriger les champs.");
     }
+    
 });
-
-
 
 //creat and show thanks booking message
 function thanksBooking(){
@@ -141,7 +200,5 @@ function thanksBooking(){
         closeModal();
         //Reflech page
         location.reload();    
-    });
-    
+    });    
 }
-

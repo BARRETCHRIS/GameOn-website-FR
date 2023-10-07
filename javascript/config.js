@@ -35,7 +35,8 @@ console.log(birthDate.value);
  const regOnlyTxt = new RegExp(
     '^([A-Za-z]{2,20})?([-]{0,1})?([A-Za-z]{2,20})$');
  const regEmail = new RegExp(
-  '^[a-z0-9.-_]+@{1}[a-z0-9-_]+\\.{1}[a-z]{2,4}$');
+  '^[A-Za-z0-9.-_]+@[A-Za-z0-9.-_]+\\.[a-z]{2,4}$');
+const regYear = /^\d{1,4}$/;
 
  // Messages
  const lineBreack = document.createElement ("br");
@@ -56,7 +57,6 @@ console.log(birthDate.value);
 
   let divError = document.querySelectorAll(".error-msg");
 
-  console.log(divError);
 
 
  
