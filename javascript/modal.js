@@ -8,14 +8,16 @@ function editNav() {
     x.className = "topnav";
   }
 }
+// END NAVIGATION
+
+// START OPEN MODAL
 // launch modal event
 modalBtn.forEach((btn) => btn.addEventListener("click", launchModal));
 // launch modal form
 function launchModal() {
   modalbg.style.display = "block";
 }
-// END NAVIGATION
-
+// END OPEN MODAL
 
 // START CLOSE MODAL
 // close modal event
