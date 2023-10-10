@@ -10,10 +10,10 @@
     <title>Reservation</title>
     <meta name="description" content="Page de réservation de GameOn. Inscription aux tournois esport.">
     <!-- Fonts -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    <link href="https://fonts.googleapis.com/css?family=DM+Sans" rel="stylesheet"/>
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link href="https://fonts.googleapis.com/css?family=DM+Sans" rel="stylesheet" type="text/css"/>
     <!-- Liens CSS -->
-    <link rel="stylesheet" href="css/modal.css" />
+    <link rel="stylesheet" href="./css/modal.css" type="text/css"/>
     <!-- Liens Scripts JS -->
     <script src="javascript/config.js" defer></script>
     <script src="javascript/modal.js" defer></script>
@@ -21,14 +21,14 @@
   </head>
   <body>
     <!-- Navbar and menu burger -->
-    <div class="topnav" id="myTopnav">
+    <header class="topnav" id="myTopnav">
 
       <div class="header-logo">
-        <img alt="logo" src="assets/images/Logo.png" width="auto" height="auto" />
+        <img alt="logo" src="assets/images/Logo.png"/>
       </div>
 
       <div class="main-navbar">
-        <a href="#" class="active"><span>Accueil</span></a>
+        <a href="#"><span>Accueil</span></a>
         <a href="#"><span>Détails de l'évènement</span></a>
         <a href="#"><span>À propos</span></a>
         <a href="#"><span>Contact</span></a>
@@ -37,12 +37,10 @@
           <i class="fa fa-bars"></i>
         </a>
       </div>
-
-    </div>
+    </header>
      <!-- Navbar and menu burger END -->
   
     <main>
-
       <!-- Landing page - corps -->
       <div class="hero-section">
         <div class="hero-content">
@@ -62,24 +60,20 @@
           <img src="assets/images/bg_img.jpg" alt="img"/>
         </div>
         
-        <button class="btn-signup modal-btn">
+        <button class="btn-signup modal-btn mobile-btn">
           je m'inscris
-        </button>
-       
-        
-        
+        </button> 
       </div>
       <!-- Landing page - corps END -->
 
       <!-- Modal booking - corps -->
       <div class="bground"> 
         <div class="content">
-          <!-- Modal booking - close cross -->
-          <span class="close"></span>
-          <!-- Modal booking - close cross END-->
-
           <!-- Modal booking - form -->
           <div class="modal-body">
+            <!-- Modal booking - close cross -->
+            <span class="close"></span>
+            <!-- Modal booking - close cross END-->
             <form
               id="reservationForm";
               name="reserve"
@@ -87,7 +81,6 @@
               method="get"
               novalidate
               >
-              <!--onsubmit="return validate();"-->
               <div
                 class="formData">
                 <label for="first">Prénom</label><br>
@@ -228,24 +221,18 @@
                 </label>
                 <br>
               </div>
-
               <button class="btn-submit button" type="submit">C'est parti</button>
-             
             </form>
           </div>
           <!-- Modal booking - form END-->
-
         </div>
       </div>
       <!-- Modal booking - corps END-->
-
     </main>
-
     <footer>
       <p class="copyrights">
         Copyright 2014 - 2022, GameOn Inc.
       </p>
     </footer>
-    
   </body>
 </html>
