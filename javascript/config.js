@@ -26,8 +26,8 @@ const cgu = document.getElementById('checkbox1');
 
  // REGEX
 // regOnlyTxt checks if the string contains 2 to 20 letters, optionally separated by a hyphen. 
-const regOnlyTxt = new RegExp(
-    '^([A-Za-z]{2,20})?([-]{0,1})?([A-Za-z]{2,20})$');
+//const regOnlyTxt = new RegExp('^([A-Za-z]{2,20})?([-]{0,1})?([A-Za-z]{2,20})$');
+const regOnlyTxt = new RegExp('^([A-Za-zÀ-ÿ]{2,20})?([-]{0,1})?([A-Za-zÀ-ÿ]{2,20})$');
 // regEmail checks if the email address is valid.
 // Ensures if email starts with letters, digits, dots, hyphens, or underscores, followed by "@" symbol, followed by letters, digits, hyphens, or underscores, followed by dot, and finally 2 to 10 letters.
 const regEmail = new RegExp(
