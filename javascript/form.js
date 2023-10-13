@@ -137,16 +137,6 @@ function checkCheckbox(tag){
 form.addEventListener("submit", (event) => {
     event.preventDefault(); // Prevent the form from being submitted automatically, would refresh the page.
 
-    // table containing the verification functions which will be applied to each field of the form.
-    const checkFonctions =[
-        checkEmptyInput,
-        checkText,
-        checkEmail,
-        checkDate,
-        checkRadio,
-        checkCheckbox
-    ];
-
     // Transform the NodeList of form elements into an array
     const formInputsArray = Array.from(formDataInput); 
 
