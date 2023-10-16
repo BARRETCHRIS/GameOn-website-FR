@@ -2,6 +2,8 @@
 const modalbg = document.querySelector(".bground");
 const modalBtn = document.querySelectorAll(".modal-btn");
 
+const formElement = document.getElementById('reservationForm');
+
 const formData = document.querySelectorAll(".formData");
 const formDataInput = document.querySelectorAll(".formData input");
 const closeBtn = document.querySelector(".close");

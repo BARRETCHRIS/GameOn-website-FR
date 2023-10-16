@@ -208,6 +208,7 @@ function thanksBooking(){
     form.addEventListener("submit", (event) => {
         closeModal();
         //Reflech page
-        location.reload();    
+        //location.reload(); 
+        formElement.reset();   
     });    
 }
